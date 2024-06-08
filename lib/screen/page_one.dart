@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uitm_8jun/screen/page_achievement.dart';
+import 'package:uitm_8jun/screen/page_list_users.dart';
 import 'package:uitm_8jun/screen/page_two.dart';
 
 class PageOne extends StatelessWidget {
@@ -72,6 +73,23 @@ class PageOne extends StatelessWidget {
                     ));
                   },
                   child: Text('Our Achievement',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  color: Colors.purple,
+                )
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(10),
+            child: Center(
+                child: MaterialButton(
+                  onPressed: (){
+                    //untuk move to the next page
+                    Navigator.push(context, MaterialPageRoute(builder: (context)
+                    => PageListUser()
+                    ));
+                  },
+                  child: Text('Our Staffs',
                     style: TextStyle(color: Colors.white),
                   ),
                   color: Colors.purple,
