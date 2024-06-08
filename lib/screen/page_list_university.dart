@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:uitm_8jun/models/model_university.dart';
+import 'package:uitm_8jun/screen/page_detail_univ.dart';
 
 class PageListUniversity extends StatefulWidget {
   const PageListUniversity({super.key});
@@ -47,6 +48,9 @@ class _PageListUniversityState extends State<PageListUniversity> {
                   child: GestureDetector(
                     onTap: (){
                       //untuk detail page
+                      Navigator.push(context, MaterialPageRoute(builder: (context)
+                        => PageDetailUniv(university: data!)
+                      ));
                     },
                     child: Card(
                       child: Padding(
