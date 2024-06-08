@@ -1,6 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:uitm_8jun/models/model_university.dart';
-
 
 class PageDetailUniv extends StatelessWidget {
 
@@ -10,8 +11,8 @@ class PageDetailUniv extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double? latUniv = double.tryParse(university.univ_lat_map);
-    double? longUniv = double.tryParse(university.univ_long_map);
+    double? latUniv = double.tryParse(university.univLatMap);
+    double? longUniv = double.tryParse(university.univLongMap);
 
     return Scaffold(
       appBar: AppBar(
@@ -26,20 +27,45 @@ class PageDetailUniv extends StatelessWidget {
           children:[
             ClipRRect(
               borderRadius : BorderRadius.circular(10),
-              child : Image.network('http://192.168.1.3:8080/server_university/images/${data?.univImage}',
-                height: 100,
-                width : double.infinity
+              child : Image.network('http://192.168.1.3:8080/server_university/images/${university?.univImage}',
+                height: 125,
+                width : double.infinity,
                 fit: BoxFit.fill,
               ),
             ),
-            Sizebox(height : 10),
+            SizedBox(height : 10),
             Text(university.univName),
-            Sizebox(height : 10),
-            Text(university.univ_address),
-            Sizebox(height : 10),
-            Text(university.univ_email),
-            Sizebox(height : 10),
-            Text(university.univ_desc),
+            SizedBox(height : 10),
+            Text(university.univAddress),
+            SizedBox(height : 10),
+            Text(university.univEmail),
+            SizedBox(height : 10),
+            Text(university.univDesc),
+            SizedBox(height: 10,),
+            Container(
+              height: 300,
+              child: GoogleMap(
+                myLocationEnabled: true,
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(latUniv ?? 0.0, longUniv ?? 0.0),
+                  zoom: 17
+                ),
+                mapType: MapType.normal,
+                markers: {
+                  Marker(
+                    markerId: MarkerId(university.univName),
+                    position: LatLng(latUniv ?? 0.0, longUniv ?? 0.0),
+                    infoWindow: InfoWindow(
+                      title: university.univName,
+                      snippet: university.univAddress
+                    )
+                  )
+                }
+
+              ),
+            )
+
+
 
           ]
         )
